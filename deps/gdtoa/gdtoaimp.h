@@ -206,7 +206,7 @@ THIS SOFTWARE.
 #define d_QNAN0 0x7ff80000
 #define d_QNAN1 0x0
 #elif defined(__APPLE__) || defined(__ANDROID__)
-#if defined(__x86_64__) || defined(__i386__) || defined(__ANDROID__)
+#if defined(__x86_64__) || defined(__arm64__) || defined(__ANDROID__)
 #define f_QNAN 0xffc00000
 #define d_QNAN0 0x0
 #define d_QNAN1 0xfff80000
@@ -220,18 +220,7 @@ THIS SOFTWARE.
 #define ldus_QNAN3 0xc000
 #define ldus_QNAN4 0xffff
 #else
-#define f_QNAN 0xffc00000
-#define d_QNAN0 0xfff80000
-#define d_QNAN1 0x0
-#define ld_QNAN0 0xfff80000
-#define ld_QNAN1 0x0
-#define ld_QNAN2 0x0
-#define ld_QNAN3 0x0
-#define ldus_QNAN0 0xfff8
-#define ldus_QNAN1 0x0
-#define ldus_QNAN2 0x0
-#define ldus_QNAN3 0x0
-#define ldus_QNAN4 0x0
+#error Unsupported architecture
 #endif
 #else
 #include "gd_qnan.h"

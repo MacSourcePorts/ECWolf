@@ -316,6 +316,23 @@ list(APPEND HEADER_FILES ${CMAKE_CURRENT_BINARY_DIR}/versiondefs.h)
 target_sources(engine PRIVATE ${HEADER_FILES})
 
 add_dependencies(engine revision_check)
+if(APPLE)
+
+target_link_libraries(engine PRIVATE
+	SDL2::SDL2_mixer
+	SDL2::SDL2_net
+	SDL2::SDL2
+	${BZIP2_LIBRARIES}
+	${JPEG_LIBRARIES}
+	lzma
+	gdtoa
+	ZLIB::ZLIB
+	"-framework AppKit"
+)
+
+else()
+
+
 target_link_libraries(engine PRIVATE
 	SDL2::SDL2_mixer
 	SDL2::SDL2_net
@@ -326,6 +343,9 @@ target_link_libraries(engine PRIVATE
 	gdtoa
 	ZLIB::ZLIB
 )
+
+endif()
+
 target_include_directories(engine PRIVATE
 	${BZIP2_INCLUDE_DIR}
 	${JPEG_INCLUDE_DIR}
