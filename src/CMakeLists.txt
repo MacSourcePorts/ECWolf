@@ -278,7 +278,10 @@ if(APPLE)
 			MACOSX_BUNDLE_LONG_VERSION_STRING "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}"
 			MACOSX_BUNDLE_SHORT_VERSION_STRING "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}"
 		)
-	endif(BUILD_BUNDLE)
+		target_link_libraries(engine PRIVATE
+			"-framework AppKit"
+		)
+		endif(BUILD_BUNDLE)
 elseif(ANDROID)
 	target_sources(engine PRIVATE
 		android/android-jni.cpp
@@ -316,22 +319,6 @@ list(APPEND HEADER_FILES ${CMAKE_CURRENT_BINARY_DIR}/versiondefs.h)
 target_sources(engine PRIVATE ${HEADER_FILES})
 
 add_dependencies(engine revision_check)
-if(APPLE)
-
-target_link_libraries(engine PRIVATE
-	SDL2::SDL2_mixer
-	SDL2::SDL2_net
-	SDL2::SDL2
-	${BZIP2_LIBRARIES}
-	${JPEG_LIBRARIES}
-	lzma
-	gdtoa
-	ZLIB::ZLIB
-	"-framework AppKit"
-)
-
-else()
-
 
 target_link_libraries(engine PRIVATE
 	SDL2::SDL2_mixer
@@ -343,8 +330,6 @@ target_link_libraries(engine PRIVATE
 	gdtoa
 	ZLIB::ZLIB
 )
-
-endif()
 
 target_include_directories(engine PRIVATE
 	${BZIP2_INCLUDE_DIR}
