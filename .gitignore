@@ -6,3 +6,4 @@ android-libs/launcher/src/com/beloko/idtech/R.java
 /.idea/
 release
 .DS_Store
+.vscode/
